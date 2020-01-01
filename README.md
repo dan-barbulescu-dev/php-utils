@@ -22,7 +22,7 @@ function next_available_filepath($filename_pattern, $iterator_start = 0)
     return $filepath;
 }
 ```
-## get_hostname_from_url - function that gets the hostname (subdomain+domain) from an URL
+## get_hostname_from_url - php function that gets the hostname (subdomain+domain) from an URL
 
 This functions extracts the subdomain + domain from an URL. For example for the $url: “http://mail.google.com/example” it would return “mail.google.com”. It does so by first removing the http protocol, and then considering the text up until the first “/” it encounters to be part of the hostname.
 
@@ -42,5 +42,17 @@ function get_hostname_from_url($url)
         $i++;
     }
     return $domain;
+}
+```
+
+## add_get_parameter_to_url - php function that adds a GET parameter to an URL
+
+Here is a short and useful function, which you can use to add GET parameters to an URL. The function checks if the URL already contains GET parameters by looking for a “?” character. If the URL already contains GET parameters, it appends a & to the URL, and if it doesn’t contain any GET parameters, it appends “?” to the URL. After the connecting character has been inserted into the URL, the function appends the new GET parameter and its value, and returns the new URL.
+
+```php
+function add_get_parameter_to_url($url, $name, $value)
+{
+    if (strpos($url, '?') !== FALSE) return $url."&".urlencode($name)."=".urlencode($value);
+    else $url."?".urlencode($name)."=".urlencode($value);
 }
 ```
